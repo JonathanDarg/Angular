@@ -1,0 +1,31 @@
+# Applies to every project folder in this repo
+
+# Dependencies and build output
+node_modules/
+dist/
+out-tsc/
+tmp/
+coverage/
+.angular/
+
+# Editor and tool settings
+.vscode/
+.idea/
+.claude/
+.editorconfig
+.prettierrc
+.history/
+*.sublime-workspace
+
+# Logs
+npm-debug.log*
+yarn-error.log*
+
+# Environment files
+.env
+.env.*
+
+# System files
+.DS_Store
+Thumbs.db
+desktop.ini
