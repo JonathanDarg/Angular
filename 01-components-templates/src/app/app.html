@@ -340,5 +340,172 @@
 <!-- * * * * * * * * * * End of Placeholder  * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
+<!-- ============================================================== -->
+<!--  01 · Components & Templates: one section per topic below.      -->
+<!--  The data and methods used here live in app.ts.                 -->
+<!-- ============================================================== -->
+<div class="lessons">
+
+  <!-- ============================================================ -->
+  <!-- 1. STANDALONE COMPONENTS                                      -->
+  <!-- ============================================================ -->
+  <section class="lesson">
+    <h2>1. Standalone Components</h2>
+    <p>A component is a reusable piece of UI: a TypeScript class + a template + styles.</p>
+
+    <!--
+      <app-profile-card> is our own component (profile-card/profile-card.ts).
+      It works here because ProfileCard is listed in the `imports` array in app.ts.
+      name="Ada" passes a plain string into the component's `name` input.
+      [role]="..." (square brackets) passes a TypeScript expression instead.
+    -->
+    <div class="row">
+      <app-profile-card name="John" role="Mathematician" />
+      <app-profile-card name="Grace" [role]="'Teacher'" />
+      <!-- role is optional, so this one falls back to its default: "Student" -->
+      <app-profile-card name="You" />
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 2. DATA BINDING                                               -->
+  <!-- ============================================================ -->
+  <section class="lesson">
+    <h2>2. Data Binding</h2>
+
+    <!-- Interpolation {{ }}: puts a value from the class into the page as text.
+         userName is a signal, so we read it by calling it: userName() -->
+    <p>Interpolation: Hello, {{ userName() }}!</p>
+
+    <!-- Expressions work inside {{ }} too (keep them simple) -->
+    <p>Expression: 2 + 3 = {{ 2 + 3 }}</p>
+
+    <!-- Property binding [prop]="value": sets a DOM property from the class.
+         Here the button's disabled property follows isLocked(). -->
+    <button type="button" [disabled]="isLocked()">I am disabled while locked</button>
+
+    <!-- Class binding [class.name]="condition": adds the class when true -->
+    <p [class.highlight]="isLocked()">Class binding: highlighted while locked</p>
+
+    <!-- Style binding [style.prop]="value": sets one inline style -->
+    <p [style.color]="textColor()">Style binding: my color is {{ textColor() }}</p>
+
+    <!-- Attribute binding [attr.x]: for HTML attributes that have no DOM property, like aria-* -->
+    <button type="button" (click)="toggleLock()" [attr.aria-pressed]="isLocked()">
+      {{ isLocked() ? 'Unlock' : 'Lock' }}
+    </button>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 3. EVENT HANDLING                                             -->
+  <!-- ============================================================ -->
+  <section class="lesson">
+    <h2>3. Event Handling</h2>
+
+    <!-- Event binding (event)="method()": runs a class method when the event fires -->
+    <div class="row">
+      <button type="button" (click)="decrement()" aria-label="Decrease count">−</button>
+      <output aria-live="polite">Count: {{ count() }}</output>
+      <button type="button" (click)="increment()" aria-label="Increase count">+</button>
+    </div>
+
+    <!-- $event is the browser's event object. Here we pass it to onNameInput(),
+         which reads the input's current text and stores it in userName. -->
+    <label for="name-input">Type your name (updates section 2 too):</label>
+    <input id="name-input" type="text" [value]="userName()" (input)="onNameInput($event)" />
+
+    <!-- Template reference variable #colorBox gives the template direct access
+         to the element, so we can pass colorBox.value without $event. -->
+    <label for="color-input">Text color for section 2:</label>
+    <input id="color-input" #colorBox type="text" placeholder="e.g. red"
+           (keyup.enter)="setColor(colorBox.value)" />
+    <!-- (keyup.enter) is a key filter: only fires when Enter is pressed -->
+    <small>Press Enter to apply.</small>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 4. CONTROL FLOW: @if / @for / @switch                         -->
+  <!-- ============================================================ -->
+  <section class="lesson">
+    <h2>4. Control Flow</h2>
+
+    <!-- @if / @else: only renders the block whose condition is true -->
+    <h3>&#64;if</h3>
+    @if (count() > 5) {
+      <p>The counter is above 5!</p>
+    } @else if (count() < 0) {
+      <p>The counter is negative.</p>
+    } @else {
+      <p>The counter is between 0 and 5. Use the buttons in section 3.</p>
+    }
+
+    <!-- @for: repeats a block for each item in a list.
+         `track task.id` tells Angular how to identify each item, so it can
+         update only the rows that changed instead of re-drawing the whole list.
+         $index is a built-in variable with the item's position.
+         @empty renders when the list has no items. -->
+    <h3>&#64;for</h3>
+    <label for="task-input">New task:</label>
+    <div class="row">
+      <input id="task-input" #taskBox type="text"
+             (keyup.enter)="addTask(taskBox.value); taskBox.value = ''" />
+      <button type="button" (click)="addTask(taskBox.value); taskBox.value = ''">Add</button>
+    </div>
+    <ul>
+      @for (task of tasks(); track task.id) {
+        <li>
+          {{ $index + 1 }}. {{ task.title }}
+          <!-- @switch: picks one block based on a value, like a switch statement -->
+          @switch (task.status) {
+            @case ('todo') { <span class="badge todo">To do</span> }
+            @case ('doing') { <span class="badge doing">In progress</span> }
+            @case ('done') { <span class="badge done">Done</span> }
+          }
+          <button type="button" (click)="cycleStatus(task.id)">Next status</button>
+          <button type="button" (click)="removeTask(task.id)">Remove</button>
+        </li>
+      } @empty {
+        <li>No tasks yet. Add one above.</li>
+      }
+    </ul>
+    <h3>&#64;switch</h3>
+    <p>Used above for each task's badge. Click "Next status" to cycle through the cases.</p>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 5. PIPES                                                      -->
+  <!-- ============================================================ -->
+  <section class="lesson">
+    <h2>5. Pipes</h2>
+    <p>A pipe formats a value for display: <code>value | pipeName:argument</code>. It never changes the original data.</p>
+
+    <ul>
+      <!-- Built-in pipes. They must be imported in app.ts (UpperCasePipe, etc.) -->
+      <li>uppercase: {{ userName() | uppercase }}</li>
+      <li>lowercase: {{ userName() | lowercase }}</li>
+      <!-- currency takes arguments after ":" — here the currency code -->
+      <li>currency: {{ price | currency:'USD' }} / {{ price | currency:'EUR' }}</li>
+      <li>percent: {{ score | percent }}</li>
+      <!-- date with a format argument -->
+      <li>date: {{ today | date:'fullDate' }} · {{ today | date:'shortTime' }}</li>
+      <!-- Pipes can be chained: the output of one feeds into the next -->
+      <li>chained: {{ today | date:'MMMM' | uppercase }}</li>
+      <!-- Our custom pipe from truncate-pipe.ts, with a limit argument of 20 -->
+      <li>
+        custom truncate:
+        <!-- No pipe here, so the original string shows exactly as written in app.ts -->
+        <br />input: {{ longText }}
+        <!-- Same value with the pipe applied: only the display changes -->
+        <br />output: {{ longText | truncate:20 }}
+      </li>
+    </ul>
+
+    <!-- json pipe: handy for debugging — prints an object as text -->
+    <p>json pipe: the first task from section 4, printed as JSON text</p>
+    <pre>{{ tasks()[0] | json }}</pre>
+  </section>
+
+</div>
+
 
 <router-outlet />
