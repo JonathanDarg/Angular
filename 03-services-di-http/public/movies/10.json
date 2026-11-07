@@ -1,0 +1,11 @@
+{
+  "id": 10,
+  "title": "Finding Nemo",
+  "year": 2003,
+  "director": "Andrew Stanton",
+  "genres": [
+    "Animation",
+    "Adventure"
+  ],
+  "summary": "A nervous clownfish crosses the ocean to find his son, who was taken to a dentist's fish tank."
+}

@@ -1,0 +1,11 @@
+{
+  "id": 5,
+  "title": "Toy Story",
+  "year": 1995,
+  "director": "John Lasseter",
+  "genres": [
+    "Animation",
+    "Comedy"
+  ],
+  "summary": "A pull-string cowboy doll feels replaced when a flashy space ranger toy arrives in his owner's room."
+}

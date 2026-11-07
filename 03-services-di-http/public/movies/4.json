@@ -1,0 +1,11 @@
+{
+  "id": 4,
+  "title": "The Dark Knight",
+  "year": 2008,
+  "director": "Christopher Nolan",
+  "genres": [
+    "Action",
+    "Crime"
+  ],
+  "summary": "Batman faces the Joker, a criminal mastermind who wants to push Gotham City into chaos."
+}

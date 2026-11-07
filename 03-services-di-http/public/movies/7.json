@@ -1,0 +1,11 @@
+{
+  "id": 7,
+  "title": "The Matrix",
+  "year": 1999,
+  "director": "The Wachowskis",
+  "genres": [
+    "Action",
+    "Sci-Fi"
+  ],
+  "summary": "A hacker discovers that the world he knows is a simulation and joins a rebellion against the machines running it."
+}

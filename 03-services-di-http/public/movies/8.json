@@ -1,0 +1,11 @@
+{
+  "id": 8,
+  "title": "Back to the Future",
+  "year": 1985,
+  "director": "Robert Zemeckis",
+  "genres": [
+    "Adventure",
+    "Comedy"
+  ],
+  "summary": "A teenager is sent thirty years into the past in a time-traveling car and must make sure his parents still fall in love."
+}

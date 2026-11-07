@@ -59,8 +59,9 @@
 <!--  03 · Services, DI & HTTP: one section per topic below.         -->
 <!--  Services live in services/, setup lives in app.config.ts,      -->
 <!--  and the code for this page lives in app.ts.                    -->
-<!--  Sections 4–6 load data from https://jsonplaceholder.typicode.com,
-      a free fake API for practice, so they need an internet connection. -->
+<!--  Sections 4–5 load data from https://jsonplaceholder.typicode.com,
+      a free fake API for practice, so they need an internet connection.
+      Section 6 loads movie files from this project's public/movies/ folder. -->
 <!-- ============================================================== -->
 <main class="lessons">
 
@@ -130,7 +131,7 @@
          APP_SETTINGS is defined in app-settings.ts and given its value in app.config.ts. -->
     <h3>InjectionToken</h3>
     <p>App name from <code>inject(APP_SETTINGS)</code>: <strong>{{ settings.appName }}</strong></p>
-    <p>API URL used by sections 4–6: <code>{{ settings.apiUrl }}</code></p>
+    <p>API URL used by sections 4–5: <code>{{ settings.apiUrl }}</code></p>
   </section>
 
   <!-- ============================================================ -->
@@ -198,19 +199,25 @@
     <h2>6. httpResource()</h2>
     <p><code>httpResource()</code> is a resource built on HttpClient. You give it a function that returns a URL; when signals in that function change, it fetches again. Much less code than section 5.</p>
 
-    <!-- postId() is read inside the URL function in app.ts, so changing it refetches -->
-    <label for="post-id">Post number (1–100):</label>
-    <input id="post-id" type="number" min="1" max="100" [value]="postId()" (input)="onPostIdInput($event)" />
+    <!-- The movie data is in public/movies/1.json … 10.json, served by this app itself.
+         movieId() is read inside the URL function in app.ts, so changing it refetches. -->
+    <div class="row">
+      <button type="button" (click)="previousMovie()" [disabled]="movieId() <= 1">◀ Previous</button>
+      <span>Movie {{ movieId() }} of 10</span>
+      <button type="button" (click)="nextMovie()" [disabled]="movieId() >= 10">Next ▶</button>
+    </div>
 
     <div aria-live="polite">
-      @if (postResource.isLoading()) {
-        <p>Loading post {{ postId() }}…</p>
-      } @else if (postResource.error()) {
-        <p class="error" role="alert">Could not load that post.</p>
-      } @else if (postResource.value(); as post) {
+      @if (movieResource.isLoading()) {
+        <p>Loading movie {{ movieId() }}…</p>
+      } @else if (movieResource.error()) {
+        <p class="error" role="alert">Could not load that movie.</p>
+      } @else if (movieResource.value(); as movie) {
+        <!-- `movie` has the shape of the Movie interface in models.ts -->
         <article class="post">
-          <h3>{{ post.title }}</h3>
-          <p>{{ post.body }}</p>
+          <h3>{{ movie.title }} ({{ movie.year }})</h3>
+          <p class="hint">Directed by {{ movie.director }} · {{ movie.genres.join(', ') }}</p>
+          <p>{{ movie.summary }}</p>
         </article>
       }
     </div>

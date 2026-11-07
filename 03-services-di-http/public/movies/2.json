@@ -1,0 +1,11 @@
+{
+  "id": 2,
+  "title": "The Godfather",
+  "year": 1972,
+  "director": "Francis Ford Coppola",
+  "genres": [
+    "Crime",
+    "Drama"
+  ],
+  "summary": "The aging head of a crime family hands control to his reluctant youngest son, who is slowly pulled into the business."
+}

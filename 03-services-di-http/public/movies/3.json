@@ -1,0 +1,11 @@
+{
+  "id": 3,
+  "title": "Spirited Away",
+  "year": 2001,
+  "director": "Hayao Miyazaki",
+  "genres": [
+    "Animation",
+    "Fantasy"
+  ],
+  "summary": "A girl stumbles into a world of spirits and must work in a magical bathhouse to free her parents."
+}

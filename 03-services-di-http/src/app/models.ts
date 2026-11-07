@@ -7,9 +7,13 @@ export interface User {
   company: { name: string };
 }
 
-export interface Post {
+// Section 6: movie files served from this project's public/movies/ folder
+// (e.g. public/movies/3.json is available at /movies/3.json).
+export interface Movie {
   id: number;
-  userId: number;
   title: string;
-  body: string;
+  year: number;
+  director: string;
+  genres: string[];
+  summary: string;
 }

@@ -5,7 +5,7 @@ import { RouterOutlet } from '@angular/router';
 import { Observable, catchError, of } from 'rxjs';
 import { APP_SETTINGS } from './app-settings';
 import { CounterPanel } from './counter-panel/counter-panel';
-import { Post, User } from './models';
+import { Movie, User } from './models';
 import { PrivateCounter } from './private-counter/private-counter';
 import { CounterService } from './services/counter.service';
 import { LoggerService } from './services/logger.service';
@@ -80,20 +80,20 @@ export class App {
   }
 
   // ---- 6. httpResource() ----
-  protected readonly postId = signal(1);
+  protected readonly movieId = signal(1);
 
-  // httpResource<Post>(() => url): the function reads postId(), so a new id
+  // httpResource<Movie>(() => url): the function reads movieId(), so a new id
   // means a new URL, which means a new request. It uses HttpClient internally,
   // so it needs provideHttpClient() too. Same isLoading()/error()/value() signals as resource().
-  protected readonly postResource = httpResource<Post>(
-    () => `${this.settings.apiUrl}/posts/${this.postId()}`,
-  );
+  // The URL starts with "/", so it's requested from this app's own server:
+  // /movies/3.json is the file public/movies/3.json.
+  protected readonly movieResource = httpResource<Movie>(() => `/movies/${this.movieId()}.json`);
 
-  protected onPostIdInput(event: Event): void {
-    const value = Number((event.target as HTMLInputElement).value);
-    // Only accept whole numbers the API actually has (1–100).
-    if (Number.isInteger(value) && value >= 1 && value <= 100) {
-      this.postId.set(value);
-    }
+  protected previousMovie(): void {
+    this.movieId.update((id) => Math.max(1, id - 1));
+  }
+
+  protected nextMovie(): void {
+    this.movieId.update((id) => Math.min(10, id + 1));
   }
 }

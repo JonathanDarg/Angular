@@ -1,0 +1,11 @@
+{
+  "id": 6,
+  "title": "Jurassic Park",
+  "year": 1993,
+  "director": "Steven Spielberg",
+  "genres": [
+    "Adventure",
+    "Sci-Fi"
+  ],
+  "summary": "Visitors to a theme park of cloned dinosaurs are stranded when the park's security systems fail."
+}
