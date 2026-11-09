@@ -1,0 +1,137 @@
+/* Page header: Angular logo + title */
+.page-header {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2.5rem 1rem 0;
+  text-align: center;
+  font-family: system-ui, sans-serif;
+  color: #1a1a1a;
+}
+
+.angular-logo {
+  width: min(240px, 70%);
+  height: auto;
+}
+
+.page-header h1 {
+  margin: 1rem 0 0.25rem;
+  font-size: 2rem;
+}
+
+.subtitle {
+  margin: 0;
+  color: #555;
+}
+
+/* Two columns: lessons on the left, demo window on the right */
+.layout {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 1rem 4rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 380px;
+  gap: 1.5rem;
+  align-items: start;
+  font-family: system-ui, sans-serif;
+  color: #1a1a1a;
+}
+
+/* Lesson sections */
+.lesson {
+  margin-bottom: 1.5rem;
+  padding: 1.25rem 1.5rem;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+}
+
+.lesson h2 { margin-top: 0; }
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+}
+
+.hint { color: #555; font-size: 0.9rem; }
+
+table { border-collapse: collapse; margin: 0.5rem 0; }
+th, td { text-align: left; padding: 0.35rem 0.75rem; border-bottom: 1px solid #ddd; }
+
+code {
+  background: #f1f1f1;
+  padding: 0.05rem 0.3rem;
+  border-radius: 4px;
+}
+
+a { color: #0b57d0; }
+
+/* Demo window: stays in view while the lessons scroll */
+.demo {
+  position: sticky;
+  top: 1rem;
+  border: 2px solid #333;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.address-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background: #eceff1;
+  border-bottom: 1px solid #ccc;
+  font-size: 0.9rem;
+}
+
+.address-bar code {
+  flex: 1;
+  background: #fff;
+  padding: 0.25rem 0.5rem;
+  border-radius: 999px;
+  overflow-wrap: anywhere;
+}
+
+.navigating { color: #8a4b00; font-weight: 600; }
+
+.demo-nav {
+  display: flex;
+  gap: 0.25rem;
+  padding: 0.5rem;
+  border-bottom: 1px solid #ddd;
+}
+
+.demo-nav a {
+  padding: 0.3rem 0.7rem;
+  border-radius: 6px;
+  text-decoration: none;
+  color: #1a1a1a;
+}
+
+/* Added by routerLinkActive to the link for the current page */
+.demo-nav a.active {
+  background: #1a1a1a;
+  color: #fff;
+}
+
+.demo-page {
+  padding: 0.5rem 1rem 1rem;
+  min-height: 220px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* Narrow screens: one column, demo window on top */
+@media (max-width: 860px) {
+  .layout { grid-template-columns: 1fr; }
+  .demo { position: static; order: -1; }
+}
