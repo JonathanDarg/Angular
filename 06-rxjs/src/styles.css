@@ -1,0 +1,106 @@
+/* Global styles: these apply inside every component, so the lesson examples
+   (each its own component in lessons/) share the same look.
+   Component styles (like app.css) only reach their own template. */
+
+body {
+  margin: 0;
+  background: #fff;
+}
+
+label {
+  display: block;
+  margin-top: 0.75rem;
+  font-weight: 600;
+}
+
+label.radio {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+  font-weight: normal;
+}
+
+input[type='search'],
+input[type='range'] {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 420px;
+  margin-top: 0.25rem;
+}
+
+input[type='search'] {
+  padding: 0.45rem 0.6rem;
+  border: 1px solid #888;
+  border-radius: 6px;
+  font: inherit;
+}
+
+button {
+  margin-top: 0.5rem;
+  padding: 0.4rem 0.9rem;
+  border: 1px solid #555;
+  border-radius: 6px;
+  background: #f4f4f4;
+  color: #1a1a1a;
+  font: inherit;
+  cursor: pointer;
+}
+
+button:disabled {
+  color: #767676;
+  cursor: not-allowed;
+}
+
+fieldset.strategy {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+table {
+  border-collapse: collapse;
+  margin-top: 0.75rem;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 0.35rem 0.75rem;
+  border-bottom: 1px solid #ddd;
+}
+
+/* A running log of what happened, shown in a monospace box */
+ol.log {
+  margin-top: 0;
+  padding: 0.5rem 0.5rem 0.5rem 2rem;
+  background: #f4f4f4;
+  border-radius: 8px;
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 0.9rem;
+}
+
+.label {
+  margin-bottom: 0.25rem;
+  color: #555;
+  font-size: 0.9rem;
+}
+
+.muted {
+  color: #555;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
