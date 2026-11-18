@@ -1,0 +1,11 @@
+/* TypeScript settings for the Playwright tests, so the editor understands them.
+   (They aren't part of the Angular app, so they need their own config.) */
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "rootDir": ".",
+    "noEmit": true,
+    "types": []
+  },
+  "include": ["./**/*.ts"]
+}
